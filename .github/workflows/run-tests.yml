@@ -20,9 +20,6 @@ jobs:
                 exclude:
                     - laravel: "^13.0"
                       php: 8.2
-                    # Laravel 12 supports PHP 8.2–8.5 only. It calls spl_object_hash(), which PHP 8.6 deprecates.
-                    - laravel: "^12.0"
-                      php: 8.6
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
         steps:

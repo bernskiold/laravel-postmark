@@ -10,7 +10,16 @@ use Bernskiold\LaravelPostmark\Jobs\ProcessPostmarkWebhook;
 use Illuminate\Support\Facades\Event;
 
 beforeEach(function () {
-    Event::fake();
+    // Fake only the package's events. Laravel's own events, such as the log
+    // event for a deprecation, must not count as dispatched by the job.
+    Event::fake([
+        EmailBounced::class,
+        EmailClicked::class,
+        EmailComplained::class,
+        EmailDelivered::class,
+        EmailOpened::class,
+        EmailSubscriptionChanged::class,
+    ]);
 });
 
 it('dispatches the event for the record type', function (string $fixture, string $eventClass) {
